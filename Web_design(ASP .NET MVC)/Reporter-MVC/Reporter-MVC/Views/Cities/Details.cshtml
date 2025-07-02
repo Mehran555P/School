@@ -1,0 +1,58 @@
+﻿@model Reporter_MVC.Models.City
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>City</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.code)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.code)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.fromCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.fromCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.toCode)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.toCode)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.stateName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.stateName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

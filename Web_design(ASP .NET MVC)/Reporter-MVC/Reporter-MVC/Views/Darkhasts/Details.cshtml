@@ -1,0 +1,146 @@
+﻿@model Reporter_MVC.Models.Darkhast
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Darkhast</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.regDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.regDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.family)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.family)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.type)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.type)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.state)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.state)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.returnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.returnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.serialNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.serialNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postSentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postSentDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.postReturnDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.postReturnDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.deliveryToApplicant)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.deliveryToApplicant)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.referingOffic)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.referingOffic)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.resendDescription)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.resendDescription)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.sendingType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.sendingType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.cost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.cost)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.officeCost)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.officeCost)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

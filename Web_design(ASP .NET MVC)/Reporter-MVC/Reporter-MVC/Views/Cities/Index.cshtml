@@ -1,0 +1,62 @@
+﻿@model IEnumerable<Reporter_MVC.Models.City>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>خانه</h2>
+
+<p class="modern-links">
+    @Html.ActionLink("دیدن درخواست ها", "Index", "Darkhasts", null, new { @class = "link-button primary" })
+</p>
+
+<p>
+    @Html.ActionLink("اضافه کردن شهر جدید", "Create", null, new { @class = "link-button" })
+</p>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.code)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.fromCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.toCode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.stateName)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.code)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.fromCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.toCode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.stateName)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

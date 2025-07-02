@@ -1,0 +1,123 @@
+﻿@model IEnumerable<Reporter_MVC.Models.Darkhast>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>درخواست ها</h2>
+
+<p>
+    @Html.ActionLink("درخواست جدید", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.regDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.family)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.type)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.state)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.returnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.serialNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postSentDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.postReturnDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliveryToApplicant)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.referingOffic)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.resendDescription)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.sendingType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cost)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.officeCost)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.regDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.name)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.family)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.state)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.returnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.serialNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postSentDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.postReturnDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.deliveryToApplicant)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.referingOffic)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.resendDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.sendingType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cost)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.officeCost)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>
