@@ -7,117 +7,117 @@
 <h2>درخواست ها</h2>
 
 <p>
-    @Html.ActionLink("درخواست جدید", "Create")
+    @Html.ActionLink("درخواست جدید", "Create", null, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.regDate)
+            تاریخ ثبت
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.name)
+            نام
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.family)
+            نام خانوادگی
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.NID)
+            کد ملی
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.type)
+            نوع درخواست
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.state)
+            استان
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.returnDate)
+            تاریخ بازگشت
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.serialNumber)
+            شماره سریال
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.postSentDate)
+            تاریخ ارسال پستی
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.postReturnDate)
+            تاریخ بازگشت پستی
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.deliveryToApplicant)
+            تحویل به متقاضی
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.referingOffic)
+            مسئول ارجاع
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.resendDescription)
+            توضیحات ارسال مجدد
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.sendingType)
+            روش ارسال
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.cost)
+            هزینه
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.officeCost)
+            هزینه دفتر
         </th>
-        <th></th>
+        <th>عملیات</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.regDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.name)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.family)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.NID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.type)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.state)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.returnDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.serialNumber)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postSentDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.postReturnDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.deliveryToApplicant)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.referingOffic)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.resendDescription)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.sendingType)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.cost)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.officeCost)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
-        </td>
-    </tr>
-}
-
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.regDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.family)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.NID)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.type)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.state)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.returnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.serialNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postSentDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.postReturnDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.deliveryToApplicant)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.referingOffic)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.resendDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.sendingType)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.cost)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.officeCost)
+            </td>
+            <td>
+                @Html.ActionLink("ویرایش", "Edit", new { id = item.Id }) 
+                @Html.ActionLink("جزئیات", "Details", new { id = item.Id }) <br>
+                @Html.ActionLink("حذف", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
 </table>

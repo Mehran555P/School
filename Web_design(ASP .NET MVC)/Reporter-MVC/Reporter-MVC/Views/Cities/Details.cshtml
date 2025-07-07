@@ -1,58 +1,52 @@
 ﻿@model Reporter_MVC.Models.City
 
 @{
-    ViewBag.Title = "Details";
+    ViewBag.Title = "جزئیات";
 }
 
-<h2>جزییات</h2>
+<h2>جزئیات</h2>
 
 <div>
     <h4>شهر</h4>
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            نام شهر
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.code)
+            کد شهر
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.code)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.fromCode)
+            کد شروع
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.fromCode)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.toCode)
+            کد پایان
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.toCode)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.stateName)
+            استان
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.stateName)
         </dd>
-
     </dl>
 </div>
 <p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("ویرایش", "Edit", new { id = Model.Id }) |
+    @Html.ActionLink("برگشت به لیست", "Index")
 </p>

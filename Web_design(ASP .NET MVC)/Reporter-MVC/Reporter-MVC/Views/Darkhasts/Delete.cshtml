@@ -1,7 +1,7 @@
 ﻿@model Reporter_MVC.Models.Darkhast
 
 @{
-    ViewBag.Title = "Delete";
+    ViewBag.Title = "حذف";
 }
 
 <h2>حذف</h2>
@@ -12,141 +12,125 @@
     <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.regDate)
+            تاریخ ثبت
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.regDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.name)
+            نام
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.name)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.family)
+            نام خانوادگی
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.family)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.NID)
+            کد ملی
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.NID)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.type)
+            نوع درخواست
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.type)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.state)
+            استان
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.state)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.returnDate)
+            تاریخ بازگشت
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.returnDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.serialNumber)
+            شماره سریال
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.serialNumber)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.postSentDate)
+            تاریخ ارسال پستی
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.postSentDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.postReturnDate)
+            تاریخ بازگشت پستی
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.postReturnDate)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.deliveryToApplicant)
+            تحویل به متقاضی
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.deliveryToApplicant)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.referingOffic)
+            مسئول ارجاع
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.referingOffic)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.resendDescription)
+            توضیحات ارسال مجدد
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.resendDescription)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.sendingType)
+            روش ارسال
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.sendingType)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.cost)
+            هزینه
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.cost)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.officeCost)
+            هزینه دفتر
         </dt>
-
         <dd>
             @Html.DisplayFor(model => model.officeCost)
         </dd>
-
     </dl>
 
-    @using (Html.BeginForm()) {
+    @using (Html.BeginForm())
+    {
         @Html.AntiForgeryToken()
 
         <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            <input type="submit" value="حذف" class="btn btn-default" /> |
+            @Html.ActionLink("برگشت به لیست", "Index")
         </div>
     }
 </div>
