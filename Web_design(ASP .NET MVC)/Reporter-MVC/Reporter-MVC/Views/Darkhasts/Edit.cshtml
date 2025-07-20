@@ -4,158 +4,235 @@
     ViewBag.Title = "ویرایش درخواست";
 }
 
-<h2>ویرایش</h2>
+<h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>ویرایش درخواست</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.Id)
 
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ ثبت</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.regDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.regDate, "", new { @class = "text-danger" })
+        <!-- ردیف اول -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.regDate, "تاریخ ثبت", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.regDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.regDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.name, "نام", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.family, "نام خانوادگی", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.family, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">نام</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        <!-- ردیف دوم -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NID, "کد ملی", new { @class = "control-label" })
+                    @Html.TextBoxFor(model => model.NID, new
+                    {
+                        @class = "form-control",
+                        maxlength = "10",
+                        onkeypress = "return isNumberKey(event)",
+                        oninput = "limitLength(this)",
+                        onpaste = "return false;" // جلوگیری از پیست
+                    })
+                    @Html.ValidationMessageFor(model => model.NID, "", new { @class = "text-danger" })
+                </div>
+
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.type, "نوع درخواست", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.state, "استان", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">نام خانوادگی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.family, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+        <!-- ردیف سوم -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.returnDate, "تاریخ بازگشت", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.serialNumber, "شماره سریال", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.serialNumber, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.serialNumber, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.postSentDate, "تاریخ ارسال پستی", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.postSentDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.postSentDate, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">کد ملی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NID, "", new { @class = "text-danger" })
+        <!-- ردیف چهارم -->
+        <div class="row">
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.postReturnDate, "تاریخ بازگشت پستی", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.postReturnDate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.postReturnDate, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.deliveryToApplicant, "تحویل به متقاضی", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.deliveryToApplicant, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.deliveryToApplicant, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.referingOffic, "مسئول ارجاع", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.referingOffic, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.referingOffic, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">نوع درخواست</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+        <!-- ردیف پنجم -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.resendDescription, "توضیحات ارسال مجدد", new { @class = "control-label" })
+                    @Html.TextAreaFor(model => model.resendDescription, new { @class = "form-control", rows = "3" })
+                    @Html.ValidationMessageFor(model => model.resendDescription, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sendingType, "روش ارسال", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.sendingType, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.sendingType, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">استان</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+        <!-- ردیف ششم -->
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cost, "هزینه", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.officeCost, "هزینه دفتر", new { @class = "control-label" })
+                    @Html.EditorFor(model => model.officeCost, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.officeCost, "", new { @class = "text-danger" })
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ بازگشت</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">شماره سریال</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.serialNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.serialNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ ارسال پستی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.postSentDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.postSentDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ بازگشت پستی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.postReturnDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.postReturnDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تحویل به متقاضی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.deliveryToApplicant, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.deliveryToApplicant, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">مسئول ارجاع</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.referingOffic, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.referingOffic, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">توضیحات ارسال مجدد</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.resendDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.resendDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">روش ارسال</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.sendingType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sendingType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">هزینه</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">هزینه دفتر</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.officeCost, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.officeCost, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        <!-- دکمه‌ها -->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="ذخیره" class="btn btn-default" />
+                <input type="submit" value="ذخیره تغییرات" class="btn btn-primary" />
+                @Html.ActionLink("انصراف", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("برگشت به لیست", "Index")
-</div>
-
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script>
+        // تابع اعتبارسنجی عددی پیشرفته
+        function isNumberKey(evt) {
+            evt = evt || window.event;
+            var charCode = (evt.which) ? evt.which : evt.keyCode;
+
+            // فقط اعداد (0-9) و کلیدهای کنترلی مجاز
+            if (charCode > 31 && (charCode < 48 || charCode > 57) &&
+                (charCode < 96 || charCode > 105)) {
+                evt.preventDefault();
+                return false;
+            }
+            return true;
+        }
+
+        // محدودیت طول و جلوگیری از ورود غیرعدد
+        function limitLength(input) {
+            // حذف هر چیزی غیر از عدد
+            input.value = input.value.replace(/\D/g, '');
+
+            // محدودیت طول
+            if (input.value.length > 10) {
+                input.value = input.value.substr(0, 10);
+            }
+        }
+
+        // اعتبارسنجی کامل کد ملی
+        $(document).ready(function() {
+            $.validator.addMethod("iranNationalCode", function(value, element) {
+                if (!value) return true;
+
+                // بررسی عددی بودن
+                if (!/^\d+$/.test(value)) {
+                    return false;
+                }
+
+                // بررسی طول
+                if (value.length !== 10) {
+                    return false;
+                }
+
+                // الگوریتم اعتبارسنجی کد ملی
+                var check = parseInt(value[9]);
+                var sum = 0;
+                for (var i = 0; i < 9; i++) {
+                    sum += parseInt(value[i]) * (10 - i);
+                }
+                var remainder = sum % 11;
+
+                return (remainder < 2 && check === remainder) ||
+                       (remainder >= 2 && check === (11 - remainder));
+            }, "کد ملی معتبر نیست");
+
+            // اعمال اعتبارسنجی
+            $("form").validate({
+                rules: {
+                    NID: {
+                        iranNationalCode: true
+                    }
+                }
+            });
+        });
+    </script>
 }

@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using Reporter_MVC.Models;
 
@@ -27,11 +24,13 @@ namespace Reporter_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Darkhast darkhast = db.Darkhasts.Find(id);
             if (darkhast == null)
             {
                 return HttpNotFound();
             }
+
             return View(darkhast);
         }
 
@@ -44,13 +43,22 @@ namespace Reporter_MVC.Controllers
         // POST: Darkhasts/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "Id,regDate,name,family,NID,type,state,returnDate,serialNumber,postSentDate,postReturnDate,deliveryToApplicant,referingOffic,resendDescription,sendingType,cost,officeCost")] Darkhast darkhast)
+        public ActionResult Create(Darkhast darkhast)
         {
+            ValidateNationalCode(darkhast.NID);
+
             if (ModelState.IsValid)
             {
-                db.Darkhasts.Add(darkhast);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Darkhasts.Add(darkhast);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "خطا در ایجاد درخواست: " + ex.Message);
+                }
             }
 
             return View(darkhast);
@@ -63,25 +71,37 @@ namespace Reporter_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Darkhast darkhast = db.Darkhasts.Find(id);
             if (darkhast == null)
             {
                 return HttpNotFound();
             }
+
             return View(darkhast);
         }
 
         // POST: Darkhasts/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,regDate,name,family,NID,type,state,returnDate,serialNumber,postSentDate,postReturnDate,deliveryToApplicant,referingOffic,resendDescription,sendingType,cost,officeCost")] Darkhast darkhast)
+        public ActionResult Edit(Darkhast darkhast)
         {
+            ValidateNationalCode(darkhast.NID);
+
             if (ModelState.IsValid)
             {
-                db.Entry(darkhast).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.Entry(darkhast).State = EntityState.Modified;
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    ModelState.AddModelError("", "خطا در ذخیره تغییرات: " + ex.Message);
+                }
             }
+
             return View(darkhast);
         }
 
@@ -92,11 +112,13 @@ namespace Reporter_MVC.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+
             Darkhast darkhast = db.Darkhasts.Find(id);
             if (darkhast == null)
             {
                 return HttpNotFound();
             }
+
             return View(darkhast);
         }
 
@@ -105,10 +127,23 @@ namespace Reporter_MVC.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Darkhast darkhast = db.Darkhasts.Find(id);
-            db.Darkhasts.Remove(darkhast);
-            db.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                Darkhast darkhast = db.Darkhasts.Find(id);
+                if (darkhast == null)
+                {
+                    return HttpNotFound();
+                }
+
+                db.Darkhasts.Remove(darkhast);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", "خطا در حذف درخواست: " + ex.Message);
+                return View("Delete", db.Darkhasts.Find(id));
+            }
         }
 
         protected override void Dispose(bool disposing)
@@ -118,6 +153,44 @@ namespace Reporter_MVC.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        // تابع اعتبارسنجی کد ملی
+        private void ValidateNationalCode(string nationalCode)
+        {
+            if (!string.IsNullOrEmpty(nationalCode))
+            {
+                // بررسی طول کد ملی
+                if (nationalCode.Length != 10)
+                {
+                    ModelState.AddModelError("NID", "کد ملی باید 10 رقم باشد");
+                    return;
+                }
+
+                // بررسی عددی بودن
+                if (!nationalCode.All(char.IsDigit))
+                {
+                    ModelState.AddModelError("NID", "کد ملی باید فقط شامل عدد باشد");
+                    return;
+                }
+
+                // الگوریتم اعتبارسنجی کد ملی ایران
+                int sum = 0;
+                for (int i = 0; i < 9; i++)
+                {
+                    sum += (10 - i) * int.Parse(nationalCode[i].ToString());
+                }
+                int remainder = sum % 11;
+                int controlDigit = int.Parse(nationalCode[9].ToString());
+
+                bool isValid = (remainder < 2 && controlDigit == remainder) ||
+                              (remainder >= 2 && controlDigit == (11 - remainder));
+
+                if (!isValid)
+                {
+                    ModelState.AddModelError("NID", "کد ملی معتبر نیست");
+                }
+            }
         }
     }
 }

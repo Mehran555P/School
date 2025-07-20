@@ -4,157 +4,181 @@
     ViewBag.Title = "افزودن درخواست";
 }
 
-<h2>افزودن</h2>
+<h2>افزودن درخواست جدید</h2>
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <h4>درخواست جدید</h4>
+        <h4>مشخصات درخواست</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ ثبت</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.regDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.regDate, "", new { @class = "text-danger" })
+        <!-- اطلاعات شخصی -->
+        <div class="panel panel-default">
+            <div class="panel-heading">اطلاعات شخصی متقاضی</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.name, "نام", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.family, "نام خانوادگی", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.family, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.NID, "کد ملی", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.NID, new { htmlAttributes = new { @class = "form-control", @maxlength = "10", @onkeypress = "return isNumberKey(event)" } })
+                        @Html.ValidationMessageFor(model => model.NID, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.regDate, "تاریخ ثبت", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.regDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.regDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">نام</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.name, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+        <!-- اطلاعات درخواست -->
+        <div class="panel panel-default">
+            <div class="panel-heading">اطلاعات درخواست</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.type, "نوع درخواست", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.state, "استان", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.serialNumber, "شماره سریال", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.serialNumber, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.serialNumber, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.returnDate, "تاریخ بازگشت", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">نام خانوادگی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.family, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.family, "", new { @class = "text-danger" })
+        <!-- اطلاعات پستی -->
+        <div class="panel panel-default">
+            <div class="panel-heading">اطلاعات پستی</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.postSentDate, "تاریخ ارسال پستی", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.postSentDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.postSentDate, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.postReturnDate, "تاریخ بازگشت پستی", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.postReturnDate, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.postReturnDate, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.sendingType, "روش ارسال", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.sendingType, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.sendingType, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.deliveryToApplicant, "تحویل به متقاضی", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.deliveryToApplicant, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.deliveryToApplicant, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">کد ملی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.NID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.NID, "", new { @class = "text-danger" })
+        <!-- اطلاعات مالی -->
+        <div class="panel panel-default">
+            <div class="panel-heading">اطلاعات مالی</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.cost, "هزینه", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.officeCost, "هزینه دفتر", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.officeCost, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.officeCost, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">نوع درخواست</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.type, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.type, "", new { @class = "text-danger" })
+        <!-- سایر اطلاعات -->
+        <div class="panel panel-default">
+            <div class="panel-heading">سایر اطلاعات</div>
+            <div class="panel-body">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.referingOffic, "مسئول ارجاع", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.referingOffic, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.referingOffic, "", new { @class = "text-danger" })
+                    </div>
+
+                    @Html.LabelFor(model => model.resendDescription, "توضیحات ارسال مجدد", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.resendDescription, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.resendDescription, "", new { @class = "text-danger" })
+                    </div>
+                </div>
             </div>
         </div>
 
-        <div class="form-group">
-            <label class="control-label col-md-2">استان</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.state, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.state, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ بازگشت</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.returnDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.returnDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">شماره سریال</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.serialNumber, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.serialNumber, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ ارسال پستی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.postSentDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.postSentDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تاریخ بازگشت پستی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.postReturnDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.postReturnDate, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">تحویل به متقاضی</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.deliveryToApplicant, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.deliveryToApplicant, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">مسئول ارجاع</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.referingOffic, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.referingOffic, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">توضیحات ارسال مجدد</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.resendDescription, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.resendDescription, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">روش ارسال</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.sendingType, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.sendingType, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">هزینه</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.cost, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.cost, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label class="control-label col-md-2">هزینه دفتر</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.officeCost, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.officeCost, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
+        <!-- دکمه های فرم -->
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="افزودن" class="btn btn-default" />
+                <input type="submit" value="ثبت درخواست" class="btn btn-primary" />
+                @Html.ActionLink("انصراف و بازگشت", "Index", null, new { @class = "btn btn-default" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("برگشت به لیست", "Index")
-</div>
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
 }
+
+<script>
+    function isNumberKey(evt) {
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        return !(charCode > 31 && (charCode < 48 || charCode > 57));
+    }
+
+    $(document).ready(function() {
+        $('#NID').inputmask('9999999999'); // نیاز به کتابچه inputmask دارد
+    });
+</script>
